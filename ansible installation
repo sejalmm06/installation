@@ -33,6 +33,7 @@ ansible_ssh_private_key_file="/etc/ansible/devopslab.pem"
 
 db-[99:101]-node.example.com
 --------------------------------------------------------------------------------
+nano  /etc/ansible/devopslab.pem #copy your pem file and add here and save it 
 ansible -m ping webservers
 chmod 400 /etc/ansible/devopslab.pem
 ansible -m ping webservers
