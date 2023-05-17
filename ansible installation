@@ -17,7 +17,7 @@ blue.example.com
 #  Ex 2: A collection of hosts belonging to the 'webservers' group
 
 [webservers]
-3.80.153.41     #replaced with node public ip
+3.80.153.41     #replaced with node private /public ip
 
 [webservers:vars]
 ansible_ssh_user="ubuntu"
@@ -36,3 +36,12 @@ db-[99:101]-node.example.com
 ansible -m ping webservers
 chmod 400 /etc/ansible/devopslab.pem
 ansible -m ping webservers
+-----------------------------------------------------------------------------------------------------------------
+after editing host file edit ansible.cfg file......note :host file is only working after updating ansible.cfg file
+-----------------------------------------------------------------------------------------------------------------------
+nano ansible.cfg
+
+uncommand (removed #)
+inventory = /etc/ansible/hosts         |
+sudo-user = root                       |  or  chmod 400 /etc/ansible/devopslab.pem 
+----------------------------------------------------------------------
