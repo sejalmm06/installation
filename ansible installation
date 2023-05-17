@@ -1,0 +1,38 @@
+apt update && apt install ansible
+ansible --version
+cd /etc/ansible
+ls -lart
+nano ansible.cfg
+nano host
+after opening host file replace this content
+----------------------------------------------------------------------
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+green.example.com
+blue.example.com
+192.168.100.1
+192.168.100.10
+
+#  Ex 2: A collection of hosts belonging to the 'webservers' group
+
+[webservers]
+3.80.153.41     #replaced with node public ip
+
+[webservers:vars]
+ansible_ssh_user="ubuntu"
+ansible_ssh_private_key_file="/etc/ansible/devopslab.pem"
+
+
+#  Ex 3: A collection of database servers in the 'dbservers' group
+
+[dbservers]
+10.25.1.56
+10.25.1.57
+
+
+db-[99:101]-node.example.com
+--------------------------------------------------------------------------------
+ansible -m ping webservers
+chmod 400 /etc/ansible/devopslab.pem
+ansible -m ping webservers
