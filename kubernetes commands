@@ -1,0 +1,28 @@
+#Using Below Commands to Deploy Custom PODS
+kubectl get node
+kubectl get pods --all-namespaces
+kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+kubectl get pods --all-namespaces
+
+kubectl create deployment kubernetes-bootcamp --image=docker.io/jocatalin/kubernetes-bootcamp:v1 --port=8080
+kubectl get deployments
+kubectl get pods
+kubectl describe pod kubernetes-bootcamp-7dc9765bf6-gbkjw
+kubectl exec -ti $POD_NAME curl localhost:8080
+
+kubectl get services
+
+kubectl expose deployment/kubernetes-bootcamp --port=8080 --target-port=8080 --type=NodePort
+
+kubectl describe services kubernetes-bootcamp
+
+kubectl scale deployments/kubernetes-bootcamp --replicas=2
+
+kubectl get pods -o wide
+
+kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+
+kubectl rollout status deployments/kubernetes-bootcamp
+
+kubectl rollout undo deployments/kubernetes-bootcamp
