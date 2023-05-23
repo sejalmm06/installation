@@ -1,0 +1,11 @@
+you will need Java to be installed on your system. 
+Maven is a build tool that is heavily dependent on Java for its functioning. Therefore, before installing Maven, make sure Java is installed on your system.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+apt update
+apt install default-jdk
+java -version
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+apt update 
+apt install maven
+mvn -version
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
