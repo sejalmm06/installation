@@ -4,3 +4,14 @@ sudo apt update && sudo apt install terraform
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 terraform version
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+apt install awscli
+aws configure                  #go to the IAM user and create IAM user with full aceess and generate access key (to craete aceess key select aceess key and then select cli....it will generate acess key and password
+paste acess key and password
+default region name :
+default output formate:
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+terraform init             #the init command initializes the Terraform working directory and downloads the necessary provider plugins.
+terraform plan             #the plan command shows you a preview of the changes that Terraform will apply based on your configuration.
+terraform apply            #the apply command creates the EC2 instance based on the configuration defined in your main.tf file. Confirm the action by typing "yes" when prompted.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+terraform destroy             #The destroy command will remove all the resources created by Terraform based on your configuration. Confirm the action by typing "yes" when prompted.
