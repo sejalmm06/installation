@@ -1,0 +1,12 @@
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl enable docker
+sudo systemctl start docker
+docker --version
+----------------------------------------------------------------------------------------
+#We will get a permission denied error as a regular user doesn’t have permission to execute docker commands, 
+so we need to add an Ubuntu user to the docker group. 
+-------------------------------------------------------------------------------------------
+sudo usermod -aG docker $USER
+    or 
+sudo usermod -aG docker ubuntu
