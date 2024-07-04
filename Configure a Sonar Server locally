@@ -11,5 +11,7 @@ cd sonarqube-9.4.0.54424/bin/linux-x86-64/
 publicip:9000
 
 
+admin and admin
+
 
 note:pre-request : java installed 
