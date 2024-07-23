@@ -9,3 +9,31 @@ apt update
 apt install maven
 mvn -version
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2nd way 
+-------------------------
+******Install OpenJDK
+sudo apt update
+sudo apt install default-jdk -y
+java -version
+
+******Download and Install Maven
+1. Visit the Maven download page.
+2. Right-click the version of Maven you want to install and copy the link. 
+wget [link] -P /tmp
+sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt      #extract the installation file to the /opt directory
+sudo ln -s /opt/apache-maven-[version] /opt/maven   #Create a symbolic link leading to the Maven installation directory and replace [version] with the Maven version you downloaded. For example:sudo ln -s /opt/apache-maven-3.9.6 /opt/maven
+
+*****Set Up Environment Variables
+sudo nano /etc/profile.d/maven.sh      #create and open the maven.sh script file in the /etc/profile.d/ directory
+
+Add the following lines to the maven.sh file:
+______________________________________________
+export JAVA_HOME=/usr/lib/jvm/default-java
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+______________________________________________
+sudo chmod +x /etc/profile.d/maven.sh     #Use the chmod command to make the maven.sh file executable
+source /etc/profile.d/maven.sh            #Execute the maven.sh script file with the source command to set up the new environment variables
+mvn -version
