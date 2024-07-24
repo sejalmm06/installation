@@ -45,4 +45,6 @@ sudo systemctl restart tomcat9
 Step 3: Open Tomcat Web Application Manager
 publicip::8080/manager/html
 
+reference: https://linuxhint.com/install_apache_tomcat_server_ubuntu_2204/
+
 
