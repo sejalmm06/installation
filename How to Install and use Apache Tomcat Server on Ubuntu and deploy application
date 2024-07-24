@@ -57,6 +57,9 @@ sudo cp /path/to/your-application.war /var/lib/tomcat9/webapps/
 
 #Verify the Deployment:
 ls /var/lib/tomcat9/webapps/
+ls -l /var/lib/tomcat9/webapps/
+sudo chown tomcat:tomcat /var/lib/tomcat9/webapps/my-app-1.0-SNAPSHOT.war
+
 
 #Check Tomcat Logs:If the application doesn't appear to be deploying correctly, check the Tomcat logs for errors
 sudo tail -f /var/log/tomcat9/catalina.out
