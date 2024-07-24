@@ -1,3 +1,4 @@
+note:pre-request : java installed 
 apt install unzip
 adduser sonarqube   |  sudo su - sonarqube  #go to the user sonarqube
 wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.4.0.54424.zip
