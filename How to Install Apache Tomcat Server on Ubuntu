@@ -1,0 +1,48 @@
+Step 1: Update system repositories
+sudo apt update 
+
+Step 2: Installation of Java
+sudo apt install openjdk-11-jdk
+java -version
+
+Step 3: Check the availability of Apache Tomcat package
+sudo apt-cache search tomcat
+
+Step 4: Install Apache Tomcat Server on Ubuntu 
+sudo apt update
+sudo apt install tomcat9 tomcat9-admin tomcat9-common tomcat9-user
+sudo systemctl status tomcat9
+
+
+Step 5: Check ports for Apache Tomcat Server
+ss -ltn
+
+Step 6: Open ports for Apache Tomcat Server
+[In case if the UFW firewall is activated on your system, then it may cause trouble while connecting external devices. So, 
+to permit the incoming from any type of source to port “8080”, write out the following “ufw” command]
+sudo ufw allow from any to any port 8080 proto tcp
+
+Step 7: Test working of Apache Tomcat Server
+publicip:8080
+
+
+**********How to use Apache Tomcat Web Application Manager on Ubuntu **********
+Step 1: Creating Tomcat user
+sudo nano /etc/tomcat9/tomcat-users.xml
+
+copy this ....
+_______________________________________________________________________________
+<tomcat-users>
+    <role rolename="manager-gui"/>
+    <role rolename="admin-gui"/>
+    <user username="admin" password="admin" roles="manager-gui,admin-gui"/>
+</tomcat-users>
+_________________________________________________________________________________
+
+Step 2: Restart Tomcat Server
+sudo systemctl restart tomcat9
+
+Step 3: Open Tomcat Web Application Manager
+publicip::8080/manager/html
+
+
