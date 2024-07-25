@@ -1,0 +1,96 @@
+Step 1 — Installing MySQL
+------------------------------------------------------------------------------------------------------
+sudo apt update
+sudo apt install mysql-server
+mysql --version
+sudo systemctl status mysql
+
+#MySQL Server should start automatically. If it doesn't, you can manually start it 
+[sudo systemctl start mysql.service
+  sudo systemctl enable mysql  ]                  #Enable MySQL to start on boot
+
+-----------------------------------------------------------------------------------------------------------
+Step 2 — Configuring MySQL
+------------------------------------------------------------------------------------------------------------
+sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+exit
+mysql -u root -p
+ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
+sudo mysql_secure_installation                    # helps you perform several security-related tasks
+
+---------------------------------------------------------------------------------------------------------
+Step 3 — Creating a Dedicated MySQL User and Granting Privileges
+---------------------------------------------------------------------------------------------------------
+sudo mysql
+mysql -u root -p
+CREATE USER 'sejal'@'host' IDENTIFIED WITH authentication_plugin BY 'Pass@123';
+_________________
+#The general syntax for granting user privileges is as follows:
+GRANT PRIVILEGE ON database.table TO 'username'@'host';                #The PRIVILEGE value in this example syntax defines what actions the user is allowed to perform on the specified database and table
+
+#gants a user global privileges to CREATE, ALTER, and DROP databases, tables, and users, as well as the power to INSERT, UPDATE, and DELETE
+data from any table on the server. It also grants the user the ability to query data with SELECT, create foreign keys with the REFERENCES 
+keyword, and perform FLUSH operations with the RELOAD privilege
+GRANT CREATE, ALTER, DROP, INSERT, UPDATE, INDEX, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'sejal'@'localhost' WITH GRANT OPTION;
+
+ #Some users may want to grant their MySQL user the ALL PRIVILEGES privilege, which will provide them with broad superuser privileges akin 
+  to the root user’s privileges, like so:
+GRANT ALL PRIVILEGES ON *.* TO 'sammy'@'localhost' WITH GRANT OPTION;
+___________________
+#This will free up any memory that the server cached as a result of the preceding CREATE USER and GRANT statements
+FLUSH PRIVILEGES;
+exit
+mysql -u sejal -p
+sudo mysqladmin -p -u sejal version        #mysqladmin tool, which is a client that lets you run administrative commands
+
+refrence : https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04#prerequisites
+
+
+# MySQL User Management Cheat Sheet
+1. Connect to MySQL Server
+mysql -u root -p
+
+2. Create a MySQL User
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+
+3. Grant All Privileges to a User on All Databases
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' WITH GRANT OPTION;
+
+4. Grant Specific Privileges on a Database
+GRANT SELECT, INSERT, UPDATE ON database_name.* TO 'username'@'localhost';
+
+5. Revoke Specific Privileges from a User
+REVOKE DELETE ON database_name.* FROM 'username'@'localhost';
+
+6. Change User Password
+SET PASSWORD FOR 'username'@'localhost' = PASSWORD('newpassword');
+
+7. Delete a MySQL User
+DROP USER 'username'@'localhost';
+
+8. View All MySQL Users 
+SELECT user, host FROM mysql.user;
+
+9. View User Privileges
+SHOW GRANTS FOR 'username'@'localhost';
+
+10. Update User Host
+RENAME USER 'username'@'localhost' TO 'username'@'newhost';
+  
+11. Flush Privileges
+FLUSH PRIVILEGES;
+
+12. Exit MySQL
+EXIT;
+
+13. Check if the User Exists
+SELECT user, host FROM mysql.user WHERE user = 'user' AND host = 'localhost';
+
+  
+
+
+
+
+
+
