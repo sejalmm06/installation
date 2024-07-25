@@ -135,6 +135,39 @@ USE my_database_restored;
 SHOW TABLES;
 SELECT * FROM employees;
 
+----------------------------------------------------------------------------------------------------------------------------------------
+step-6 Connecting to a MySQL server from MySQL Workbench 
+----------------------------------------------------------------------------------------------------------------------------------------
+****On Ubuntu Server****
+#Open the MySQL configuration file for editing:
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+__________
+bind-address = 127.0.0.1  #lookat this line
+bind-address = 0.0.0.0    #chane it with this one
+#This allows MySQL to listen on all IP addresses.
+___________
+sudo systemctl restart mysql
+
+#Create a Remote User
+sudo mysql -u root -p
+CREATE USER 'remote_user'@'your_ip_address' IDENTIFIED BY 'Pass@123';
+GRANT ALL PRIVILEGES ON *.* TO 'remote_user'@'your_ip_address' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EXIT;
+sudo ufw allow 3306   #adjust Firewall Settings
+
+****On MySQL Workbench (on local system)****
+Click on the “+” icon next to “MySQL Connections” to create a new connection.
+Enter a name for your connection in the “Connection Name” field (e.g., MyRemoteMySQL).
+
+#Enter Connection Details:
+Hostname: Enter the IP address or hostname of your Ubuntu server where MySQL is running.
+Port: Enter 3306 (the default port for MySQL).
+Username: Enter the username you created on the Ubuntu server (e.g., remote_user).
+Password: Click “Store in Vault...” to enter and save the password you set for the user.
+
+Test Connection
+
 
 
 
