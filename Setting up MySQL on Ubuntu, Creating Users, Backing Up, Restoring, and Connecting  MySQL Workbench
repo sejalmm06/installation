@@ -18,6 +18,11 @@ exit
 mysql -u root -p
 ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
 sudo mysql_secure_installation                    # helps you perform several security-related tasks
+Set root password: Choose a strong password for the root user.
+Remove anonymous users: Yes, to prevent unauthorized access.
+Disallow root login remotely: Yes, to enhance security.
+Remove test database and access to it: Yes, to avoid unnecessary clutter.
+Reload privilege tables now: Yes, to apply changes immediately.
 
 ---------------------------------------------------------------------------------------------------------
 Step 3 — Creating a Dedicated MySQL User and Granting Privileges
@@ -87,8 +92,48 @@ EXIT;
 13. Check if the User Exists
 SELECT user, host FROM mysql.user WHERE user = 'user' AND host = 'localhost';
 
-  
+----------------------------------------------------------------------------------------------------------------------------
+step 4 - Create a Database and Add Data
+----------------------------------------------------------------------------------------------------------------------------
 
+sudo mysql -u root -p
+CREATE DATABASE my_first_database;
+SHOW DATABASES;
+USE new_database;
+#Create a table called employees:
+___________________________
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    hire_date DATE
+);
+____________________________
+#Insert some data into the employees table:
+____________________________
+INSERT INTO employees (first_name, last_name, email, hire_date)
+VALUES
+('John', 'Doe', 'john.doe@example.com', '2023-01-15'),
+('Jane', 'Smith', 'jane.smith@example.com', '2023-02-20'),
+('Alice', 'Johnson', 'alice.johnson@example.com', '2023-03-10');
+______________________________
+#Verify that the data has been inserted:
+SELECT * FROM employees;
+EXIT;
+
+------------------------------------------------------------------------------------------------------------------------------------
+step 5 - Backup and Restore  the Database
+---------------------------------------------------------------------------------------------------------------------------------------
+mysqldump -u root -p my_first_database > my_first_database   #BACKUP COMMAND
+ls -l
+mysql -u root -p my_database_restored < my_first_database.sql   # Import Command:
+
+#Verify the Import
+mysql -u root -p
+USE my_database_restored;
+SHOW TABLES;
+SELECT * FROM employees;
 
 
 
