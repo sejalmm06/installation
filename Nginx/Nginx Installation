@@ -1,7 +1,7 @@
 Step 1 – Installing Nginx
 sudo apt update
 sudo apt install nginx
-
+--------
 Step 2 – Adjusting the Firewall
 sudo ufw app list
 
@@ -12,8 +12,18 @@ sudo ufw app list
 
 sudo ufw allow 'Nginx HTTP'         #Right now, we will only need to allow traffic on port 80. You can enable this by using command
 sudo ufw status                     #You can verify the change
-
+----------
 Step 3 – Checking your Web Server
 systemctl status nginx
 
 http://your_server_ip
+________________________________________________________________________________________________________
+Step 4 – Managing the Nginx Process
+sudo systemctl stop nginx     #To stop your web server
+sudo systemctl start nginx    #To start the web server when it is stopped
+sudo systemctl restart nginx  #To stop and then start the service again
+sudo systemctl reload nginx   #If you are only making configuration changes, Nginx can often reload without dropping connections.
+sudo systemctl disable nginx  #By default, Nginx is configured to start automatically when the server boots. If this is not what you want, you can disable this behavior 
+sudo systemctl enable nginx   #To re-enable the service to start up at boot
+_____________________________________________________________________________________________________________
+https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04
