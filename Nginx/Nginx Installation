@@ -1,1 +1,19 @@
+Step 1 – Installing Nginx
+sudo apt update
+sudo apt install nginx
 
+Step 2 – Adjusting the Firewall
+sudo ufw app list
+
+#[ Nginx Full: This profile opens both port 80 (normal, unencrypted web traffic) 
+  and port 443 (TLS/SSL encrypted traffic)
+  Nginx HTTP: This profile opens only port 80 (normal, unencrypted web traffic)
+  Nginx HTTPS: This profile opens only port 443 (TLS/SSL encrypted traffic) ]
+
+sudo ufw allow 'Nginx HTTP'         #Right now, we will only need to allow traffic on port 80. You can enable this by using command
+sudo ufw status                     #You can verify the change
+
+Step 3 – Checking your Web Server
+systemctl status nginx
+
+http://your_server_ip
