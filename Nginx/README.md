@@ -13,3 +13,6 @@
 ### Server Logs
 - **`/var/log/nginx/access.log`**: Records every request made to your web server, unless otherwise configured.
 - **`/var/log/nginx/error.log`**: Logs any errors encountered by Nginx.
+
+### SSL Certificate Files
+- **`/etc/nginx/ssl/`**: A recommended directory for storing SSL certificates and private keys. Ensure you create this directory and place your SSL certificate (`.crt` or `.pem`) and private key (`.key`) files here.
