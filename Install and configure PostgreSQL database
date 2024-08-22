@@ -10,15 +10,16 @@ sudo systemctl enable postgresql
 sudo -i -u postgres
 psql
 
-#Log in to PostgreSQL as the Superuser:sudo -u postgres psql  or psql -U postgres
-#Test the Connection
-psql -U postgres -d postgres -h localhost
 
 
 3.Set a Password for the postgres User:
 \password postgres
 You will be prompted to enter and confirm the new password.
 \q            # Exit PostgreSQL Prompt
+
+#Log in to PostgreSQL as the Superuser:sudo -u postgres psql  or psql -U postgres
+#Test the Connection
+psql -U postgres -d postgres -h localhost
 
 4.Configure Remote Access postgresql step by step
 sudo find / -name postgresql.conf
