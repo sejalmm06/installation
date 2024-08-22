@@ -1,0 +1,32 @@
+1. Install PostgreSQL
+sudo apt-get update
+sudo apt install postgresql
+psql --version
+sudo systemctl status postgresql
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+
+2. Access PostgreSQL
+sudo -i -u postgres
+psql
+
+3.Set a Password for the postgres User:
+\password postgres
+You will be prompted to enter and confirm the new password.
+\q            # Exit PostgreSQL Prompt
+
+4.Configure Remote Access postgresql step by step
+sudo find / -name postgresql.conf
+sudo nano /etc/postgresql/16/main/postgresql.conf
+Modify listen_addresses (Find the listen_addresses setting in the postgresql.conf file. By default, it might be commented out:#listen_addresses = 'localhost')
+Change it to: listen_addresses = '*'
+
+sudo systemctl restart postgresql
+
+5.Update pg_hba.conf for Remote Access
+sudo nano /etc/postgresql/16/main/pg_hba.conf
+#Add or update the entries to allow connections from specific IP addresses or ranges. For example:
+host    all             all             0.0.0.0/0               md5
+sudo systemctl reload postgresql
+
+
