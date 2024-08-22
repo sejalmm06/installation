@@ -10,6 +10,10 @@ sudo systemctl enable postgresql
 sudo -i -u postgres
 psql
 
+#Log in to PostgreSQL as the Superuser:sudo -u postgres psql  or psql -U postgres
+
+#
+
 3.Set a Password for the postgres User:
 \password postgres
 You will be prompted to enter and confirm the new password.
