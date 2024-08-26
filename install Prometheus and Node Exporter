@@ -1,0 +1,31 @@
+Step 1: Install Prometheus
+sudo apt update
+sudo apt install prometheus
+sudo systemctl status prometheus
+sudo systemctl restart prometheus
+
+
+
+Step 2: Install Prometheus Node Exporter
+sudo apt update
+sudo apt install prometheus-node-exporter
+
+sudo systemctl status prometheus-node-exporter
+sudo systemctl enable prometheus-node-exporter
+
+Step 3: Access Prometheus and Node Exporter
+Prometheus:  http://<your_server_ip>:9090 
+Node Exporter: http://<your_server_ip>:9100/metrics.
+
+
+ Step 4: Configure Prometheus to Scrape Metrics from Node Exporter
+ nano /etc/prometheus/prometheus.yml
+Add a Scrape Job for Node Exporter
+______________________
+ - job_name: 'node_exporter'
+    scrape_interval: 30s
+   static_configs:
+      - targets: ['publicip:9100']
+_______________________
+sudo systemctl restart prometheus
+
