@@ -29,3 +29,26 @@ ______________________
 _______________________
 sudo systemctl restart prometheus
 
+step 5. Install Alertmanager (Optional but Recommended)
+sudo apt update
+sudo apt install prometheus-alertmanager
+
+step 6. Configure Alerting Rules in Prometheus
+1.Create or Edit the alert.rules File:
+sudo nano /etc/prometheus/alert.rules.yml
+
+2. Update Prometheus Configuration
+nano /etc/prometheus/prometheus.yml
+rule_files:
+  - "alert_rules.yml"
+sudo systemctl reload prometheus
+sudo systemctl restart alertmanager
+
+3. Configure Alertmanager
+sudo nano /etc/prometheus/alertmanager.yml
+sudo systemctl reload alertmanager
+sudo systemctl reload prometheus
+
+4. Error Logs: Check Alertmanager logs if you encounter issues with email notifications. Logs can be viewed with:
+sudo journalctl -u alertmanager
+
