@@ -1,0 +1,8 @@
+sudo apt update
+click here for the latest version : https://igniterealtime.org/downloads/
+https://igniterealtime.org/downloadServlet?filename=openfire/openfire_4.8.3_all.deb
+
+curl -L <URL> -o <INSTALL_PACKAGE_NAME>
+curl -L https://igniterealtime.org/downloadServlet?filename=openfire/openfire_4.8.3_all.deb -o openfire_4.8.3_all.deb
+ls
+sudo apt install ./openfire_4.8.3_all.deb openjdk-11-jre
