@@ -55,3 +55,10 @@ sudo systemctl reload prometheus
 4. Error Logs: Check Alertmanager logs if you encounter issues with email notifications. Logs can be viewed with:
 sudo journalctl -u alertmanager
 
+
+#change port of prometheus
+sudo find / -name 'prometheus.service'
+sudo nano /usr/lib/systemd/system/prometheus.service
+#update the port
+ExecStart=/usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml --web.listen-address=:9091
+
