@@ -1,0 +1,68 @@
+Step 1: Create the Bash Script
+sudo nano /usr/local/bin/restart_services.sh
+Add the Script Content
+___________________________________________________________________________________
+#!/bin/bash
+ 
+LOGFILE="/var/log/restart_services.log"
+TEMP_LOGFILE="/root/restart_services_temp.log"
+ 
+echo "$(date): Starting script execution." >> $LOGFILE
+echo "$(date): Starting script execution." >> $TEMP_LOGFILE
+ 
+# Function to check if a service is running and restart if not
+restart_if_down() {
+    local service=$1
+    local start_command=$2
+ 
+    echo "$(date): Checking status of $service." >> $LOGFILE
+    echo "$(date): Checking status of $service." >> $TEMP_LOGFILE
+ 
+    if ! systemctl is-active --quiet "$service"; then
+        echo "$(date): $service is down. Attempting to restart..." >> $LOGFILE
+        echo "$(date): $service is down. Attempting to restart..." >> $TEMP_LOGFILE
+        systemctl restart "$service"
+        # Check if restart was successful
+        if systemctl is-active --quiet "$service"; then
+            echo "$(date): $service restarted successfully." >> $LOGFILE
+            echo "$(date): $service restarted successfully." >> $TEMP_LOGFILE
+        else
+            echo "$(date): Failed to restart $service." >> $LOGFILE
+            echo "$(date): Failed to restart $service." >> $TEMP_LOGFILE
+        fi
+    else
+        echo "$(date): $service is running." >> $LOGFILE
+        echo "$(date): $service is running." >> $TEMP_LOGFILE
+    fi
+}
+ 
+# Restart Tomcat if down
+restart_if_down "tomcat" "systemctl start tomcat10"
+ 
+# Restart Nginx if down
+restart_if_down "nginx" "systemctl start nginx"
+ 
+echo "$(date): Script execution completed." >> $LOGFILE
+echo "$(date): Script execution completed." >> $TEMP_LOGFILE
+____________________________________________________________________________
+step 2: Make the Script Executable
+sudo chmod +x /usr/local/bin/restart_services.sh
+
+Step 3: Test the Script
+#Run the Script Manually
+sudo /usr/local/bin/restart_services.sh
+#Check the Log File:Verify that the script is working by checking the log file:
+cat /var/log/restart_services.log
+
+Step 4: Schedule the Script with Cron
+#Edit the Crontab
+sudo crontab -e
+#Add a Cron Job
+*/5 * * * * /usr/local/bin/restart_services.sh
+
+Step 5: Verify Cron Job
+#List Cron Jobs
+sudo crontab -l
+#Check for Cron Job Logs
+grep CRON /var/log/syslog
+
