@@ -1,2 +1,52 @@
 sudo apt update
 sudo apt install apache2
+
+#install PhP
+sudo apt install php php-cli php-mbstring php-pdo php-mysql
+
+sudo systemctl start apache2
+sudo systemctl enable apache2
+sudo systemctl is-enabled apache2
+
+#Configure Apache for PHP
+php --version
+sudo a2enmod php8.1   # (replace with your PHP version)
+sudo systemctl restart apache2
+
+#Set up Your PHP Application
+sudo mkdir -p /var/www/html/myapp
+
+#Copy your PHP files
+scp -r /path/to/local/app/* user@server_ip:/var/www/html/myapp/
+
+sudo chown -R www-data:www-data /var/www/html/myapp
+sudo chmod -R 755 /var/www/html/myapp
+
+
+#Configure Apache to Serve Your Application
+--Create a new virtual host configuration file:
+
+sudo nano /etc/apache2/sites-available/myapp.conf
+
+--------------------------
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/myapp
+    ServerName myapp.com
+
+    <Directory /var/www/html/myapp>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+------------------------------- note:Replace myapp.com with your actual domain or IP address.
+
+sudo a2ensite myapp.conf
+sudo systemctl restart apache2
+sudo ufw allow 'Apache Full'
+
+http://your_server_ip/
