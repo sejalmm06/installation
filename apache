@@ -50,3 +50,45 @@ sudo systemctl restart apache2
 sudo ufw allow 'Apache Full'
 
 http://your_server_ip/
+
+
+----------------------------------------------------------
+cp -r ~/laravel-realworld-example-app/* /var/www/html/myapp/
+sudo chown -R www-data:www-data /var/www/html/myapp/
+sudo chmod -R 755 /var/www/html/myapp/
+sudo chmod -R 775 /var/www/html/myapp/storage /var/www/html/myapp/bootstrap/cache
+-------------------------------------------------
+sudo apt install libapache2-mod-php8.2
+cd /etc/php/8.2/apache2/
+ls
+sudo nano php.ini
+---------------change below number under ubove file-------
+max_execution_time = 300
+upload_max_filesize = 100M
+post_max_size = 128M
+date.timezone = Asia/Kolkata
+---------------------------------------------------------------
+sudo systemctl restart apache2
+
+sudo nano test.conf
+--------------
+<Directory /var/www/html/php>
+        Require all granted
+</Directory>
+
+<VirtualHost *:80>
+        ServerName ip or dns
+        ServerAdmin admin@localhost
+        DocumentRoot /var/www/html/php
+</VirtualHost>
+-------------------
+sudo ln -s /etc/apache2/sites-available/test.conf /etc/apache2/sites-enabled/
+sudo unlink /etc/apache2/sites-enabled/000-default.conf
+
+sudo a2dissite myapp.conf  #for desable config
+sudo a2ensite test.conf    #for enable config 
+
+
+
+
+
